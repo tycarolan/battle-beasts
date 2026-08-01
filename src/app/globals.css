@@ -6,10 +6,12 @@
  *
  * Always dark. That is a house convention, but it is not meant to be an
  * unargued one — every repo in the workshop states its own reason for it in
- * this comment, and the reasons are not the same. The hub's is that a second
- * palette would be maintenance for no gain; Chroma's is that a surround which
- * changed with the OS theme would change what the player is being asked to
- * judge. REPLACE THIS PARAGRAPH with the reason that is true for this app.
+ * this comment, and the reasons are not the same. This one's is legibility
+ * under motion: a beast has to be told apart from the beast beside it while
+ * both are moving, and the roster's colours are chosen for contrast against a
+ * near-black arena. A light surround would flatten exactly the distinctions the
+ * player is reading fastest, and re-tuning twelve sprites against a second
+ * background buys nothing anyone asked for.
  *
  * Extend with app-specific tokens below rather than editing the five — Scuttle
  * adds `--sand` and `--shell` for its canvas, which is the pattern working as
@@ -54,10 +56,10 @@ body {
 /*
  * A phone-first app that puts controls at the bottom edge is an app played on
  * top of every gesture a mobile browser wants to claim — pull to refresh,
- * rubber-band scroll, double-tap to zoom. Uncomment for those; delete for a
- * page that scrolls normally.
+ * rubber-band scroll, double-tap to zoom. Playing a card is a tap near the
+ * bottom edge followed by a tap in the arena, which is the exact shape of the
+ * two gestures the browser would rather have for itself.
  */
-/*
 html,
 body {
   overscroll-behavior: none;
@@ -66,4 +68,3 @@ body {
 body {
   -webkit-tap-highlight-color: transparent;
 }
-*/

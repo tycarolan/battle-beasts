@@ -12,20 +12,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// TEMPLATE: replace every string below, and the subdomain, with this app's own.
-// `metadataBase` and the Open Graph block are what make a shared link unfurl as
-// this app rather than as a bare URL.
 export const metadata: Metadata = {
-  title: "App Template",
+  title: "Battle Beasts",
   description:
-    "Two sentences, written for someone who has never seen this project: what it is, then how it runs.",
-  applicationName: "App Template",
-  metadataBase: new URL("https://app-template.taiotech.com"),
+    "A real-time lane battler: twelve animal units, three towers a side, and a hand of four cards paid for out of regenerating elixir. Runs in a phone browser with nothing to install.",
+  applicationName: "Battle Beasts",
+  metadataBase: new URL("https://battlebeasts.taiotech.com"),
   openGraph: {
-    title: "App Template",
-    description: "What it is, in one line.",
-    url: "https://app-template.taiotech.com",
-    siteName: "App Template",
+    title: "Battle Beasts",
+    description: "Spend elixir, drop beasts, take down three towers.",
+    url: "https://battlebeasts.taiotech.com",
+    siteName: "Battle Beasts",
     type: "website",
   },
 };
@@ -33,10 +30,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  // `maximumScale`/`userScalable` disable pinch zoom, which is the right call
-  // only when controls sit at the screen edge where a zoomed page would hide
-  // them — both games need it. Delete both lines for anything text-first,
-  // where suppressing zoom is an accessibility regression for no benefit.
+  // The card hand sits on the bottom edge and the arena fills everything above
+  // it, so a zoomed page hides the only controls there are. Kept for that
+  // reason; there is no text here a player needs to enlarge to read.
   maximumScale: 1,
   userScalable: false,
   themeColor: "#09090b",
