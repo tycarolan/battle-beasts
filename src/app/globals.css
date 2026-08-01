@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/*
+ * The five shared TaioTech tokens. Every surface in the workshop starts from
+ * this near-black base so the apps and the hub read as one thing.
+ *
+ * Always dark. That is a house convention, but it is not meant to be an
+ * unargued one — every repo in the workshop states its own reason for it in
+ * this comment, and the reasons are not the same. The hub's is that a second
+ * palette would be maintenance for no gain; Chroma's is that a surround which
+ * changed with the OS theme would change what the player is being asked to
+ * judge. REPLACE THIS PARAGRAPH with the reason that is true for this app.
+ *
+ * Extend with app-specific tokens below rather than editing the five — Scuttle
+ * adds `--sand` and `--shell` for its canvas, which is the pattern working as
+ * intended. Changing the five is how two surfaces stop matching.
+ */
+:root {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --muted: #a1a1aa;
+  --line: #27272a;
+  --accent: #f97316;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/*
+ * A phone-first app that puts controls at the bottom edge is an app played on
+ * top of every gesture a mobile browser wants to claim — pull to refresh,
+ * rubber-band scroll, double-tap to zoom. Uncomment for those; delete for a
+ * page that scrolls normally.
+ */
+/*
+html,
+body {
+  overscroll-behavior: none;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+*/
