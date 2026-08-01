@@ -37,11 +37,35 @@ type Effect = {
 export class Feedback {
   private lastHp = new Map<number, number>();
   private lastSeen = new Map<number, { x: number; y: number; side: 0 | 1; scale: number }>();
+  private launches = new Map<number, { x: number; y: number; travel: number }>();
   private effects: Effect[] = [];
+
+  /**
+   * Where a shot was fired from, and how long its whole flight is.
+   *
+   * The simulation never moves a projectile — it records where it started and
+   * counts ticks — so the only way to draw one travelling is to remember where
+   * it first appeared and how far off impact was at that moment. Both are read
+   * off the state the first time a shot is seen and never written back.
+   */
+  shotLaunch(id: number): { x: number; y: number; travel: number } | undefined {
+    return this.launches.get(id);
+  }
 
   /** Compare against the previous look and record anything worth drawing. */
   observe(state: BattleState): void {
     const alive = new Set<number>();
+
+    const inFlight = new Set<number>();
+    for (const shot of state.projectiles) {
+      inFlight.add(shot.id);
+      if (!this.launches.has(shot.id)) {
+        this.launches.set(shot.id, { x: shot.x, y: shot.y, travel: shot.remaining });
+      }
+    }
+    for (const id of this.launches.keys()) {
+      if (!inFlight.has(id)) this.launches.delete(id);
+    }
 
     for (const entity of state.entities) {
       alive.add(entity.id);
@@ -96,6 +120,7 @@ export class Feedback {
   reset(): void {
     this.lastHp.clear();
     this.lastSeen.clear();
+    this.launches.clear();
     this.effects = [];
   }
 }

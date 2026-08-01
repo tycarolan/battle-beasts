@@ -38,6 +38,7 @@ import { MAX_ELIXIR, MS_PER_TICK, TICKS_PER_ELIXIR, TICKS_PER_SECOND } from "@/l
 import { draw, fitViewport, paintField, toTiles, type Trail, type Viewport } from "@/lib/render/draw";
 import { Feedback } from "@/lib/render/feedback";
 import { clearSpriteCache, paintDesign } from "@/lib/render/sprites";
+import { clearTowerCache } from "@/lib/render/towers";
 import {
   createBattle,
   DEFAULT_RULES,
@@ -113,7 +114,8 @@ export function Battle({ opponentIndex = 0 }: { opponentIndex?: number }) {
     if (!ctx) return;
 
     let frame = 0;
-    let last = performance.now();
+    const started = performance.now();
+    let last = started;
     let accumulator = 0;
     let sinceReadout = 0;
 
@@ -128,6 +130,7 @@ export function Battle({ opponentIndex = 0 }: { opponentIndex?: number }) {
       // Sprites are rasterised for a particular pixel size, so a scale change
       // invalidates all of them.
       clearSpriteCache();
+      clearTowerCache();
 
       // Repaint the static field into its own bitmap, at device resolution.
       const field = fieldRef.current ?? document.createElement("canvas");
@@ -194,6 +197,10 @@ export function Battle({ opponentIndex = 0 }: { opponentIndex?: number }) {
         viewRef.current,
         previousRef.current,
         Math.min(1, accumulator / MS_PER_TICK),
+        // Wall clock, not tick count. Animation is allowed to be as smooth as
+        // the display and the simulation is not, so the two run on separate
+        // clocks and only this one reaches the renderer.
+        (now - started) / 1000,
         selectedRef.current !== null,
         feedbackRef.current,
       );

@@ -222,6 +222,33 @@ function paintRiver(ctx: CanvasRenderingContext2D, view: Viewport): void {
   ctx.fillStyle = water;
   ctx.fillRect(tx(0), top, ARENA_WIDTH * scale, depth);
 
+  // The banks. A ragged earth lip on each side, drawn over the turf's edge so
+  // the river is cut into the ground rather than laid on top of it — the same
+  // trick as the tower's plinth, and the reason the water reads as having a
+  // depth the ground units are refusing to enter.
+  ctx.save();
+  ctx.strokeStyle = "rgba(0,0,0,0.5)";
+  ctx.lineWidth = Math.max(1.5, scale * 0.16);
+  for (const edge of [RIVER_Y - RIVER_HALF_WIDTH, RIVER_Y + RIVER_HALF_WIDTH]) {
+    ctx.beginPath();
+    ctx.moveTo(tx(0), ty(edge));
+    // A shallow, fixed wobble. Straight would read as a canal.
+    for (let x = 0; x <= ARENA_WIDTH; x += 0.5) {
+      const wobble = (((x * 37) % 7) / 7 - 0.5) * 0.09;
+      ctx.lineTo(tx(x), ty(edge + wobble));
+    }
+    ctx.stroke();
+  }
+
+  // A lit rim on the near bank only, where the light would actually catch.
+  ctx.strokeStyle = "rgba(190, 220, 200, 0.09)";
+  ctx.lineWidth = Math.max(1, scale * 0.07);
+  ctx.beginPath();
+  ctx.moveTo(tx(0), ty(RIVER_Y + RIVER_HALF_WIDTH + 0.06));
+  ctx.lineTo(tx(ARENA_WIDTH), ty(RIVER_Y + RIVER_HALF_WIDTH + 0.06));
+  ctx.stroke();
+  ctx.restore();
+
   // A few horizontal glints, so the water reads as a surface.
   ctx.save();
   ctx.strokeStyle = "rgba(150, 200, 255, 0.10)";
@@ -263,8 +290,40 @@ function paintBridge(ctx: CanvasRenderingContext2D, view: Viewport, centre: numb
     ctx.fillRect(tx(left), ty(top) + i * plankHeight, BRIDGE_WIDTH * scale, plankHeight * 0.72);
   }
 
+  // A darker seam where each plank meets the next, so the timber has thickness
+  // rather than being two tones of brown.
+  ctx.strokeStyle = "rgba(0,0,0,0.28)";
+  ctx.lineWidth = Math.max(1, scale * 0.03);
+  for (let i = 1; i < planks; i += 1) {
+    const y = ty(top) + i * plankHeight;
+    ctx.beginPath();
+    ctx.moveTo(tx(left), y);
+    ctx.lineTo(tx(left + BRIDGE_WIDTH), y);
+    ctx.stroke();
+  }
+
   ctx.fillStyle = FIELD.bridgeRail;
   const rail = Math.max(1.5, scale * 0.14);
   ctx.fillRect(tx(left) - rail / 2, ty(top), rail, (bottom - top) * scale);
   ctx.fillRect(tx(left + BRIDGE_WIDTH) - rail / 2, ty(top), rail, (bottom - top) * scale);
+
+  // Posts at the four corners. A bridge that stops dead at the bank looks
+  // painted on; something holding it up is what makes it a crossing.
+  const post = Math.max(2.5, scale * 0.26);
+  for (const x of [left, left + BRIDGE_WIDTH]) {
+    for (const y of [top, bottom]) {
+      ctx.fillStyle = "rgba(0,0,0,0.4)";
+      ctx.beginPath();
+      ctx.ellipse(tx(x) + post * 0.2, ty(y) + post * 0.24, post * 0.6, post * 0.34, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = FIELD.bridgePlank;
+      ctx.beginPath();
+      ctx.arc(tx(x), ty(y), post * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "rgba(255,225,180,0.16)";
+      ctx.beginPath();
+      ctx.arc(tx(x) - post * 0.12, ty(y) - post * 0.12, post * 0.24, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
 }

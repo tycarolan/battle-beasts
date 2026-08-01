@@ -69,6 +69,15 @@ export const FIELD = {
   stoneDark: "#232935",
   stone: "#333b4a",
   stoneLit: "#414b5d",
+  /**
+   * The line between courses, and the top surface a block presents to the sky.
+   *
+   * Masonry is the one thing on the field lit from above rather than from the
+   * left: a parapet reads as a solid you could stand on only if its top face is
+   * brighter than any of its sides.
+   */
+  mortar: "#191d26",
+  stoneTop: "#556076",
   /** Health. */
   hp: "#79d17f",
   hpHurt: "#e0c15e",
