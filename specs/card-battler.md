@@ -1,7 +1,7 @@
 # Card Battler — Phase 1
 
 > **Status**: Draft
-> **Dependencies**: A new repo generated from `TaioTech/app-template`; a Supabase project owned by that repo
+> **Dependencies**: A new repo generated from `tycarolan/app-template`; a Supabase project owned by that repo
 > **Date**: 2026-07-31
 
 ## Summary
@@ -91,7 +91,7 @@ which was an accident of the first two games rather than a decision.
 - **Accounts.** Anonymous on first play, upgradeable to an email account so
   progress survives a new device. Progression is stored server-side.
 - **Ledger submission** to the hub, per `docs/PROFILE_INTEGRATION.md` in
-  `TaioTech/taiotech`.
+  `tycarolan/taiotech`.
 
 ### Out of Scope
 
@@ -435,7 +435,7 @@ footer link home, which is half the boundary between this repo and the hub.
 ## File Summary
 
 This spec is destined for the game's own repo, generated from
-`TaioTech/app-template`. It is drafted here only because the repo is unnamed;
+`tycarolan/app-template`. It is drafted here only because the repo is unnamed;
 the file summary belongs to the plan, written there.
 
 ### Docs

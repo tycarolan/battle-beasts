@@ -76,7 +76,7 @@ All four gates must pass before anything is called done.
 ## Where it came from
 
 Written in a remote session that could not create a repository, so it was parked
-inside the hub at `TaioTech/taiotech` under `staged-game/` rather than lost, and
+inside the hub at `tycarolan/taiotech` under `staged-game/` rather than lost, and
 moved here afterwards.
 
 ---

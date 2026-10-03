@@ -40,7 +40,7 @@ name. Neither blocks phases 1–2, because no simulation module names the game.
 
 ## Files
 
-Paths are in the game's own repo, generated from `TaioTech/app-template`.
+Paths are in the game's own repo, generated from `tycarolan/app-template`.
 
 ### Phase 0
 
@@ -130,7 +130,7 @@ Paths are in the game's own repo, generated from `TaioTech/app-template`.
 the spec lives with the code.
 
 - [ ] Settle the name — this is what unblocks everything
-- [ ] Generate from `TaioTech/app-template`, default branch `master`
+- [ ] Generate from `tycarolan/app-template`, default branch `master`
 - [ ] Work the template's setup checklist top to bottom
 - [ ] Move the spec and this plan across with their history
 - [ ] Create the Vercel project, point the subdomain at it

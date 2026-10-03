@@ -46,7 +46,7 @@ it. See the hub's `docs/WORKSHOP.md` for how the repos relate.
 It is an arcade entry, so `src/lib/day.ts` is kept — but nothing imports it yet,
 because the game submits nothing. When it does, the collectible is the player's
 battle result and the contract is `docs/PROFILE_INTEGRATION.md` in
-`TaioTech/taiotech`. Link to that document; do not restate it.
+`tycarolan/taiotech`. Link to that document; do not restate it.
 
 ## Commands
 
@@ -205,5 +205,5 @@ Most work needs none of them — see the thresholds in
   spec is required and the workflow around it
 - [docs/SPEC_TEMPLATE.md](docs/SPEC_TEMPLATE.md),
   [docs/PLAN_TEMPLATE.md](docs/PLAN_TEMPLATE.md)
-- `TaioTech/taiotech` → `docs/WORKSHOP.md` — every repo in the workshop and the
+- `tycarolan/taiotech` → `docs/WORKSHOP.md` — every repo in the workshop and the
   boundary between them. Start there when a task reaches past this repo.
